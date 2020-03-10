@@ -13,7 +13,7 @@ function Count() {
 
     return (
         <div>
-            <p>Items {count}.</p>
+            <p>Items [{count}].</p>
             <button onClick={countButtonHandler}>Click Me!</button>
         </div>
     )
