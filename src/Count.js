@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
 function Count() {
     const [count, setCount] = useState(0);
 
-    const countButtonHandler = () => {
+    const countButtonHandler = useCallback(() => {
         if(count >= 15){
             alert('15 Up!!');
             return
         }
         setCount(count + 1);
-    }
+    }, [count]);
 
     return (
         <div>

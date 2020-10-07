@@ -6,9 +6,6 @@
 body{
     padding: 10px;
 }
-body.onloaded{
-
-}
 .onloaded .movie-list{
     background:#ebeef5;
     padding:70px 50px 50px;
