@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import "./App.css";
 import MovieComponent from './Components/MovieComponent'
-import Count from './Count'
 
 function App() {
 
