@@ -22,9 +22,9 @@ function MovieComponent() {
         let scrollY = window.pageYOffset;
         let windowHeight = document.documentElement.offsetHeight;
         let documentHeight = document.documentElement.clientHeight;
-        if (scrollY + documentHeight > windowHeight - 800) {
+        if (scrollY + documentHeight > windowHeight - (window.innerHeight / 2)) {
           if (!moviesLoading.current) {
-            console.log('moviessss');
+            console.log('Movies Request');
             moviesLoading.current = true;
             const movie = await _callApi(20, pageCount)
             setMovies((prev) => {
@@ -34,11 +34,6 @@ function MovieComponent() {
               ]
             });
             console.log(movies);
-
-            setTimeout(() => {
-              moviesLoading.current = false;
-              setPageCount((prev) => prev + 1);
-            }, 1500);
           }
         }
       }
@@ -51,16 +46,19 @@ function MovieComponent() {
     const _loadMovies = async () => {
         const movies = await _callApi(20, 1)
         setMovies(movies)
-        setLoadMovies(true);
-
+        setLoadMovies(true)
         console.log(movies)
     }
 
     const _callApi = (limit, page) => {
         return (
             fetch(`https://yts.mx/api/v2/list_movies.json?sort_by=like_count&limit=${limit}&page=${page}`)
-            .then((response) => {return response.json()})
-            .then((json) => {return json.data.movies})
+            .then((response) => {return response.json();})
+            .then((json) => {
+              moviesLoading.current = false;
+              setPageCount((prev) => prev + 1);
+              return json.data.movies;
+            })
             .catch((err) => {console.log(err)})
         )
     }
